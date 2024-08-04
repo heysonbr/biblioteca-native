@@ -12,7 +12,7 @@ import {
 import { useState, useEffect } from "react";
 import { fetchBooks } from "../lib/libreria";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { BookCard } from "./bookCard";
+import { AnimatedBookCard, BookCard } from "./bookCard";
 
 export function Main() {
   const [books, setBooks] = useState([]);
@@ -24,13 +24,14 @@ export function Main() {
 
   return (
     <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+      <Text style={styles.titulo}>Biblioteca</Text>
       {books.length === 0 ? (
         <ActivityIndicator size={"large"} />
       ) : (
         <FlatList
           data={books}
           keyExtractor={(book) => book.id}
-          renderItem={({ item }) => <BookCard book={item} />}
+          renderItem={({ item, index }) => <AnimatedBookCard book={item} index={index} />}
         />
       )}
     </View>
@@ -44,5 +45,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 6,
+  },
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 8,
   },
 });

@@ -1,4 +1,5 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Animated } from "react-native";
+import { useRef, useEffect } from "react";
 
 
 
@@ -8,7 +9,7 @@ export function BookCard({ book }) {
       <Image
         source={{ uri: book.caratula }}
         style={styles.caratula}
-        resizeMode="contain"
+        resizeMode="cover"
       />
       <View style={styles.datos}>
         <Text style={styles.titulo}>{book.titulo}</Text>
@@ -17,6 +18,26 @@ export function BookCard({ book }) {
         <Text>ISBN: {book.ISBN}</Text>
       </View>
     </View>
+  );
+}
+
+
+export function AnimatedBookCard({ book, index }) {
+  const opacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 1000,
+      delay: index * 200,
+      useNativeDriver: true,
+    }).start();
+  }, [opacity, index]);
+
+  return (
+    <Animated.View style={{ opacity }}>
+      <BookCard book={book} />
+    </Animated.View>
   );
 }
 
@@ -43,5 +64,7 @@ const styles = StyleSheet.create({
   caratula: {
     width: "30%",
     height: 200,
+    borderRadius: 20,
+    overflow: "hidden",
   },
 });
