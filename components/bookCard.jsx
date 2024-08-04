@@ -22,7 +22,7 @@ export function BookCard({ book, index }) {
         </>
       ) : (
         <>
-          <View style={[styles.datos, { justifyContent: 'flex-end', paddingLeft: 10 }]}>
+          <View style={[styles.datos, { justifyContent: 'flex-end' }]}>
             <Text style={styles.titulo}>{book.titulo}</Text>
             <Text>{book.escritor}</Text>
             <Text>{book.genero}</Text>
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
   datos: {
     width: "70%",
     paddingLeft: 30,
+    paddingRight: 30,
   },
   caratula: {
     width: "30%",
