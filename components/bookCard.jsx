@@ -3,20 +3,38 @@ import { useRef, useEffect } from "react";
 
 
 
-export function BookCard({ book }) {
+export function BookCard({ book, index }) {
   return (
     <View key={book.id} style={styles.stepContainer}>
-      <Image
-        source={{ uri: book.caratula }}
-        style={styles.caratula}
-        resizeMode="cover"
-      />
-      <View style={styles.datos}>
-        <Text style={styles.titulo}>{book.titulo}</Text>
-        <Text>{book.escritor}</Text>
-        <Text>{book.genero}</Text>
-        <Text>ISBN: {book.ISBN}</Text>
-      </View>
+      {index % 2 === 0 ? (
+        <>
+          <Image
+            source={{ uri: book.caratula }}
+            style={styles.caratula}
+            resizeMode="cover"
+          />
+          <View style={[styles.datos, { justifyContent: 'flex-start' }]}>
+            <Text style={styles.titulo}>{book.titulo}</Text>
+            <Text>{book.escritor}</Text>
+            <Text>{book.genero}</Text>
+            <Text>ISBN: {book.ISBN}</Text>
+          </View>
+        </>
+      ) : (
+        <>
+          <View style={[styles.datos, { justifyContent: 'flex-end', paddingLeft: 10 }]}>
+            <Text style={styles.titulo}>{book.titulo}</Text>
+            <Text>{book.escritor}</Text>
+            <Text>{book.genero}</Text>
+            <Text>ISBN: {book.ISBN}</Text>
+          </View>
+          <Image
+            source={{ uri: book.caratula }}
+            style={styles.caratula}
+            resizeMode="cover"
+          />
+        </>
+      )}
     </View>
   );
 }
@@ -36,7 +54,7 @@ export function AnimatedBookCard({ book, index }) {
 
   return (
     <Animated.View style={{ opacity }}>
-      <BookCard book={book} />
+      <BookCard book={book} index={index} />
     </Animated.View>
   );
 }
@@ -51,7 +69,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
+    marginVertical: 5,
+    marginHorizontal: 10,
     padding: 10,
+    backgroundColor: "grey",
+    borderRadius: 10,
   },
   titulo: {
     fontSize: 20,
