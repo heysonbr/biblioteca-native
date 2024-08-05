@@ -3,6 +3,7 @@ import { Image, Pressable, Text, View, Alert } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
+import { DevSettings } from "react-native";
 
 import { fetchBookInfo } from "../lib/libreria";
 import { deleteBook } from "../lib/libreria";
@@ -53,19 +54,37 @@ export default function Detail() {
             <Pressable className="bg-blue-500 rounded-lg p-2 mt-4">
               <Text className="text-white">Editar</Text>
             </Pressable>
-
             <Pressable
               className="bg-red-500 rounded-lg p-2 mt-4"
               onPress={() => {
-                deleteBook(id)
-                  .then((books) => {
-                    // Aquí puedes manejar la respuesta
-                    console.log(books);
-                  })
-                  .catch((error) => console.error(error));
+                deleteBook(id);
+
+                // Alert.alert(
+                //   "Borrar libro",
+                //   "¿Estás seguro de que quieres borrar este libro?",
+                //   [
+                //     {
+                //       text: "No",
+                //       style: "cancel",
+                //     },
+                //     {
+                //       text: "Sí",
+                //       onPress: () => {
+                //         deleteBook(id)
+                //           .then(() => {
+                //             // Recarga la aplicación
+                //             DevSettings.reload();
+                //           })
+                //           .catch((error) => console.error(error));
+                //       },
+                //     },
+                //   ]
+                // );
               }}
             >
-              <Text className="text-white">Borrar</Text>
+              <Link href="/" className="text-white">
+                Borrar
+              </Link>
             </Pressable>
           </View>
         </View>
