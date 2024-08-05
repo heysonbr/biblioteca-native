@@ -9,9 +9,7 @@ export default function Layout() {
       <Stack
         screenOptions={{
           headerTitle: "",
-          headerLeft: () => (
-            <Text className="text-2xl font-bold">Biblioteca </Text>
-          ),
+          headerLeft: () => <Text className="text-2xl ">Biblioteca </Text>,
           headerRight: () => (
             <Link asChild href="/about">
               <Pressable className="pl-5">

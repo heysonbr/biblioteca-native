@@ -1,9 +1,12 @@
 import { Link } from "expo-router";
-import { Image, Pressable, Text, View } from "react-native";
+import { Image, Pressable, Text, View, Alert } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
+
 import { fetchBookInfo } from "../lib/libreria";
+import { deleteBook } from "../lib/libreria";
+
 import { ActivityIndicator } from "react-native";
 
 export default function Detail() {
@@ -50,7 +53,18 @@ export default function Detail() {
             <Pressable className="bg-blue-500 rounded-lg p-2 mt-4">
               <Text className="text-white">Editar</Text>
             </Pressable>
-            <Pressable className="bg-red-500 rounded-lg p-2 mt-4">
+
+            <Pressable
+              className="bg-red-500 rounded-lg p-2 mt-4"
+              onPress={() => {
+                deleteBook(id)
+                  .then((books) => {
+                    // Aquí puedes manejar la respuesta
+                    console.log(books);
+                  })
+                  .catch((error) => console.error(error));
+              }}
+            >
               <Text className="text-white">Borrar</Text>
             </Pressable>
           </View>

@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useState, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
 
 import { fetchBooks } from "./lib/libreria";
 import { Main } from "./components/Main";
