@@ -8,7 +8,8 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
-
+import { Link } from "expo-router";
+import Entypo from '@expo/vector-icons/Entypo';
 import { useState, useEffect } from "react";
 import { fetchBooks } from "../lib/libreria";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -24,7 +25,12 @@ export function Main() {
 
   return (
     <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
-      <Text style={styles.titulo}>Biblioteca</Text>
+      <Text style={styles.titulo} >Biblioteca </Text>
+      <Link asChild href="/about" >
+        <Pressable className="pl-5">
+          <Entypo name="info-with-circle" size={24} color="black" />
+        </Pressable>
+      </Link>
       {books.length === 0 ? (
         <ActivityIndicator size={"large"} />
       ) : (

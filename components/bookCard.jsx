@@ -1,41 +1,47 @@
-import { View, Text, Image, StyleSheet, Animated } from "react-native";
+import { View, Text, Image, StyleSheet, Animated, Pressable } from "react-native";
 import { useRef, useEffect } from "react";
+import { Link } from "expo-router";
+import { styled } from "nativewind";
 
-
+const StyledPressable = styled(Pressable);
 
 export function BookCard({ book, index }) {
   return (
-    <View key={book.id} style={styles.stepContainer}>
-      {index % 2 === 0 ? (
-        <>
-          <Image
-            source={{ uri: book.caratula }}
-            style={styles.caratula}
-            resizeMode="cover"
-          />
-          <View style={[styles.datos, { justifyContent: 'flex-start' }]}>
-            <Text style={styles.titulo}>{book.titulo}</Text>
-            <Text>{book.escritor}</Text>
-            <Text>{book.genero}</Text>
-            <Text>ISBN: {book.ISBN}</Text>
-          </View>
-        </>
-      ) : (
-        <>
-          <View style={[styles.datos, { justifyContent: 'flex-end' }]}>
-            <Text style={styles.titulo}>{book.titulo}</Text>
-            <Text>{book.escritor}</Text>
-            <Text>{book.genero}</Text>
-            <Text>ISBN: {book.ISBN}</Text>
-          </View>
-          <Image
-            source={{ uri: book.caratula }}
-            style={styles.caratula}
-            resizeMode="cover"
-          />
-        </>
-      )}
-    </View>
+    <Link href={`/${book.id}`} asChild>
+      <StyledPressable className="active:opacity-50 active:border-y-2 ctive:border-black">
+        <View key={book.id} style={styles.stepContainer}>
+          {index % 2 === 0 ? (
+            <>
+              <Image
+                source={{ uri: book.caratula }}
+                style={styles.caratula}
+                resizeMode="cover"
+              />
+              <View style={[styles.datos, { justifyContent: 'flex-start' }]}>
+                <Text style={styles.titulo}>{book.titulo}</Text>
+                <Text>{book.escritor}</Text>
+                <Text>{book.genero}</Text>
+                <Text>ISBN: {book.ISBN}</Text>
+              </View>
+            </>
+          ) : (
+            <>
+              <View style={[styles.datos, { justifyContent: 'flex-end' }]}>
+                <Text style={styles.titulo}>{book.titulo}</Text>
+                <Text>{book.escritor}</Text>
+                <Text>{book.genero}</Text>
+                <Text>ISBN: {book.ISBN}</Text>
+              </View>
+              <Image
+                source={{ uri: book.caratula }}
+                style={styles.caratula}
+                resizeMode="cover"
+              />
+            </>
+          )}
+        </View>
+      </StyledPressable>
+    </Link>
   );
 }
 
