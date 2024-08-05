@@ -20,20 +20,26 @@ import { AnimatedBookCard, BookCard } from "./bookCard";
 
 export function Main() {
   const [books, setBooks] = useState([]);
+  const [displayedBooks, setDisplayedBooks] = useState([]);
 
 
   useEffect(() => {
     fetchBooks(setBooks);
   }, []);
 
+  useEffect(() => {
+    const shuffledBooks = books.sort(() => 0.5 - Math.random());
+    setDisplayedBooks(shuffledBooks.slice(0, 8));
+  }, [books]);
+
   return (
     <Screen className="bg-white" >
 
-      {books.length === 0 ? (
+      {displayedBooks.length === 0 ? (
         <ActivityIndicator size={"large"} />
       ) : (
         <FlatList
-          data={books}
+          data={displayedBooks}
           keyExtractor={(book) => book.id}
           renderItem={({ item, index }) => <AnimatedBookCard book={item} index={index} />}
         />
