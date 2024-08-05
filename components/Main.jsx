@@ -11,14 +11,16 @@ import {
 import { Link } from "expo-router";
 import { Screen } from "./Screen";
 
+
+
 import { useState, useEffect } from "react";
 import { fetchBooks } from "../lib/libreria";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 import { AnimatedBookCard, BookCard } from "./bookCard";
 
 export function Main() {
   const [books, setBooks] = useState([]);
-  const insets = useSafeAreaInsets();
+
 
   useEffect(() => {
     fetchBooks(setBooks);

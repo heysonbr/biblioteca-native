@@ -31,14 +31,14 @@ export default function Detail() {
         <ActivityIndicator size={"large"} />
       ) : (
         <View className="pt-4">
-          <View className="flex-row">
+          <View className="flex-row pb-4">
             <Image
               source={{ uri: bookInfo.caratula }}
               resizeMode="cover"
               className="rounded-lg h-80 w-64"
             />
           </View>
-          <View>
+          <View className="gap-2">
             <Text className="text-black font-bold">
               Autor:{bookInfo?.escritor}
             </Text>
@@ -57,34 +57,36 @@ export default function Detail() {
             <Pressable
               className="bg-red-500 rounded-lg p-2 mt-4"
               onPress={() => {
-                deleteBook(id);
+                // deleteBook(id);
 
-                // Alert.alert(
-                //   "Borrar libro",
-                //   "¿Estás seguro de que quieres borrar este libro?",
-                //   [
-                //     {
-                //       text: "No",
-                //       style: "cancel",
-                //     },
-                //     {
-                //       text: "Sí",
-                //       onPress: () => {
-                //         deleteBook(id)
-                //           .then(() => {
-                //             // Recarga la aplicación
-                //             DevSettings.reload();
-                //           })
-                //           .catch((error) => console.error(error));
-                //       },
-                //     },
-                //   ]
-                // );
+                Alert.alert(
+                  "Borrar libro",
+                  "¿Estás seguro de que quieres borrar este libro?",
+                  [
+                    {
+                      text: "No",
+                      style: "cancel",
+                    },
+                    {
+                      text: "Sí",
+                      onPress: () => {
+                        deleteBook(id)
+                          .then(() => {
+                            // Recarga la aplicación
+                            DevSettings.reload();
+                          })
+                          .catch((error) => console.error(error));
+                      },
+                    },
+                  ]
+                );
               }}
             >
-              <Link href="/" className="text-white">
+              <Text className="text-white">Borrar</Text>
+
+              {/* <Link href="/" className="text-white">
                 Borrar
-              </Link>
+              </Link> */}
             </Pressable>
           </View>
         </View>
