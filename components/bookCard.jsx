@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 10,
     backgroundColor: "grey",
-    borderRadius: 10,
+    borderRadius: 20,
   },
   titulo: {
     fontSize: 20,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   caratula: {
     width: "30%",
-    height: 200,
+    height: 180,
     borderRadius: 20,
     overflow: "hidden",
   },
