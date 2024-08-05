@@ -4,7 +4,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function About() {
   return (
-    <ScrollView>
+    <ScrollView className="pt-4 bg-white">
       <Link asChild href="/">
         <Pressable>
           <FontAwesome name="home" size={24} color="black" />
