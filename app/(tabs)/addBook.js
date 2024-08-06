@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, Text } from "react-native";
+import { View, TextInput, Button, Text, Alert } from "react-native";
 import { createBook } from "../../lib/libreria";
 
 export default function AddBook() {
@@ -13,6 +13,8 @@ export default function AddBook() {
     createBook(book)
       .then((response) => {
         console.log("Libro creado con éxito:", response);
+        Alert.alert("Libro creado con éxito");
+        setBook({});
       })
       .catch((error) => {
         console.error("Error al crear el libro:", error);
