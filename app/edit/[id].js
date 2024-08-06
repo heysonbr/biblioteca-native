@@ -1,0 +1,109 @@
+import React, { useState } from "react";
+import {
+  View,
+  TextInput,
+  Button,
+  Text,
+  ActivityIndicator,
+  Alert,
+} from "react-native";
+import { modifyBook } from "../../lib/libreria";
+import { useLocalSearchParams, Stack, useNavigation } from "expo-router";
+
+export default function Edit() {
+  const { id } = useLocalSearchParams();
+  const navigation = useNavigation();
+  const [bookInfo, setBookInfo] = useState({});
+
+  const handleChange = (name, value) => {
+    setBookInfo((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = () => {
+    Alert.alert(
+      "Guardar cambios",
+      "¿Estás seguro de que quieres guardar los cambios?",
+      [
+        {
+          text: "No",
+          style: "cancel",
+        },
+        {
+          text: "Sí",
+          onPress: () => {
+            modifyBook(id, bookInfo)
+              .then((updatedBook) => {
+                console.log(updatedBook);
+                navigation.goBack();
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          },
+        },
+      ]
+    );
+  };
+
+  if (!bookInfo) {
+    return <ActivityIndicator size="large" />;
+  }
+
+  return (
+    <View className="flex-1 items-center pt-10">
+      <Stack.Screen
+        options={{
+          headerTitle: () => <Text></Text>,
+          headerLeft: () => null,
+        }}
+      />
+      <Text className="font-bold text-xl pb-2">Editar libro</Text>
+
+      <Text>Titulo</Text>
+      <TextInput
+        className="border border-gray-400 rounded-lg p-2 w-80 mb-2"
+        value={bookInfo.titulo}
+        onChangeText={(value) => handleChange("titulo", value)}
+        placeholder="Introduce el título"
+      />
+      <Text>Páginas</Text>
+      <TextInput
+        className="border border-gray-400 rounded-lg p-2 w-80 mb-2"
+        value={bookInfo.paginas}
+        onChangeText={(value) => handleChange("paginas", value)}
+        placeholder="Introduce el número de páginas"
+        keyboardType="numeric"
+      />
+      <Text>ISBN</Text>
+      <TextInput
+        className="border border-gray-400 rounded-lg p-2 w-80 mb-2"
+        value={bookInfo.ISBN}
+        onChangeText={(value) => handleChange("ISBN", value)}
+        placeholder="Introduce el ISBN"
+        keyboardType="numeric"
+      />
+      <Text>Géneros</Text>
+      <TextInput
+        className="border border-gray-400 rounded-lg p-2 w-80 mb-2"
+        value={bookInfo.genero}
+        onChangeText={(value) => handleChange("genero", value)}
+        placeholder="Introduce el géneros separados por comas ,"
+      />
+      <Text>Sinopsis</Text>
+      <TextInput
+        className="border border-gray-400 rounded-lg p-2 w-80 mb-2"
+        value={bookInfo.sinopsis}
+        onChangeText={(value) => handleChange("sinopsis", value)}
+        placeholder="Introduce la sinopsis"
+      />
+      {/* <Text>Portada</Text>
+      <TextInput
+        className="border border-gray-400 rounded-lg p-2 w-80 mb-2"
+        value={bookInfo.caratula}
+        onChangeText={(value) => handleChange("caratula", value)}
+        placeholder="Introduce la URL de la portada"
+      /> */}
+      <Button title="Guardar cambios" onPress={handleSubmit} />
+    </View>
+  );
+}

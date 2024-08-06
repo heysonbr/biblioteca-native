@@ -2,9 +2,9 @@ import { Link } from "expo-router";
 import { Image, Pressable, Text, View, Alert } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Stack } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { DevSettings } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import { fetchBookInfo } from "../lib/libreria";
 import { deleteBook } from "../lib/libreria";
@@ -19,6 +19,13 @@ export default function Detail() {
   useEffect(() => {
     fetchBookInfo(id, setBookInfo);
   }, [id]);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchBookInfo(id, setBookInfo);
+      return () => {};
+    }, [fetchBookInfo])
+  );
 
   return (
     <View className="flex-1 pt-3 px-16  items-center ">
@@ -54,7 +61,9 @@ export default function Detail() {
           </View>
           <View className="flex-row gap-6 items-center justify-center pt-8">
             <Pressable className="bg-blue-500 rounded-lg p-2 mt-4">
-              <Text className="text-white">Editar</Text>
+              <Link href={`/edit/${bookInfo.id}`} className="text-white">
+                Editar
+              </Link>
             </Pressable>
             <Pressable
               className="bg-red-500 rounded-lg p-2 mt-4"

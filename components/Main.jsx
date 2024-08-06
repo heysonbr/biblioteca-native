@@ -12,20 +12,27 @@ import { Link } from "expo-router";
 import { Screen } from "./Screen";
 
 
-
+import { useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 import { fetchBooks } from "../lib/libreria";
 
-import { AnimatedBookCard, BookCard } from "./bookCard";
+import { AnimatedBookCard,  } from "./bookCard";
 
 export function Main() {
   const [books, setBooks] = useState([]);
   const [displayedBooks, setDisplayedBooks] = useState([]);
 
-
-  useEffect(() => {
+  const fetchBooksData = useCallback(() => {
     fetchBooks(setBooks);
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchBooksData();
+      return () => { };
+    }, [fetchBooksData])
+  );
 
   useEffect(() => {
     const shuffledBooks = books.sort(() => 0.5 - Math.random());
