@@ -4,6 +4,7 @@ import { useLocalSearchParams } from "expo-router";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
 import { DevSettings } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { fetchBookInfo } from "../lib/libreria";
 import { deleteBook } from "../lib/libreria";
@@ -13,6 +14,7 @@ import { ActivityIndicator } from "react-native";
 export default function Detail() {
   const { id } = useLocalSearchParams();
   const [bookInfo, setBookInfo] = useState(null);
+  const navigation = useNavigation();
 
   useEffect(() => {
     fetchBookInfo(id, setBookInfo);
@@ -72,8 +74,7 @@ export default function Detail() {
                       onPress: () => {
                         deleteBook(id)
                           .then(() => {
-                            // Recarga la aplicación
-                            DevSettings.reload();
+                            navigation.goBack();
                           })
                           .catch((error) => console.error(error));
                       },
@@ -85,8 +86,8 @@ export default function Detail() {
               <Text className="text-white">Borrar</Text>
 
               {/* <Link href="/" className="text-white">
-                Borrar
-              </Link> */}
+    Borrar
+  </Link> */}
             </Pressable>
           </View>
         </View>
