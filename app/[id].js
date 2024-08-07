@@ -52,6 +52,9 @@ export default function Detail() {
               Autor:{bookInfo?.escritor}
             </Text>
             <Text className="text-black font-bold">
+              Paginas:{bookInfo?.paginas}
+            </Text>
+            <Text className="text-black font-bold">
               Genero:{bookInfo?.genero}
             </Text>
             <Text className="text-black font-bold">ISBN:{bookInfo?.ISBN}</Text>

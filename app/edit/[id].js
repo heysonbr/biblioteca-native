@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TextInput,
@@ -7,13 +7,17 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { modifyBook } from "../../lib/libreria";
+import { modifyBook, fetchBookInfo } from "../../lib/libreria";
 import { useLocalSearchParams, Stack, useNavigation } from "expo-router";
 
 export default function Edit() {
   const { id } = useLocalSearchParams();
   const navigation = useNavigation();
   const [bookInfo, setBookInfo] = useState({});
+
+  useEffect(() => {
+    fetchBookInfo(id, setBookInfo);
+  }, []);
 
   const handleChange = (name, value) => {
     setBookInfo((prevState) => ({ ...prevState, [name]: value }));
@@ -69,7 +73,7 @@ export default function Edit() {
       <Text>Páginas</Text>
       <TextInput
         className="border border-gray-400 rounded-lg p-2 w-80 mb-2"
-        value={bookInfo.paginas}
+        value={(bookInfo.paginas ?? "").toString()}
         onChangeText={(value) => handleChange("paginas", value)}
         placeholder="Introduce el número de páginas"
         keyboardType="numeric"
@@ -77,7 +81,7 @@ export default function Edit() {
       <Text>ISBN</Text>
       <TextInput
         className="border border-gray-400 rounded-lg p-2 w-80 mb-2"
-        value={bookInfo.ISBN}
+        value={(bookInfo.ISBN ?? "").toString()}
         onChangeText={(value) => handleChange("ISBN", value)}
         placeholder="Introduce el ISBN"
         keyboardType="numeric"
@@ -89,7 +93,7 @@ export default function Edit() {
         onChangeText={(value) => handleChange("genero", value)}
         placeholder="Introduce el géneros separados por comas ,"
       />
-      <Text>Sinopsis</Text>
+      <Text>Sinopsis: {(bookInfo.sinopsis ?? "").length} letras </Text>
       <TextInput
         className="border border-gray-400 rounded-lg p-2 w-80 mb-2"
         value={bookInfo.sinopsis}
