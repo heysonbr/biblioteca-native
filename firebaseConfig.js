@@ -1,5 +1,6 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getStorage } from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
 import {
   FIREBASE_PROJECT_ID,
   FIREBASE_PRIVATE_KEY_ID,
@@ -13,30 +14,20 @@ import {
 } from "@env";
 
 const firebaseConfig = {
-  projectId: FIREBASE_PROJECT_ID,
-  privateKeyId: FIREBASE_PRIVATE_KEY_ID,
-  privateKey: FIREBASE_PRIVATE_KEY,
-  clientEmail: FIREBASE_CLIENT_EMAIL,
-  clientId: FIREBASE_CLIENT_ID,
-  authUri: FIREBASE_AUTH_URI,
-  tokenUri: FIREBASE_TOKEN_URI,
-  authProviderX509CertUrl: FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
-  clientX509CertUrl: FIREBASE_CLIENT_X509_CERT_URL,
+  apiKey: "AIzaSyANNP--T4XJl6aGdG_MFhS40jlXCx9ABhY",
+  authDomain: "books1-a5253.firebaseapp.com",
+  projectId: "books1-a5253",
   storageBucket: "gs://books1-a5253.appspot.com",
+  messagingSenderId: "440107021536",
+  appId: "440107021536",
 };
 
 // console.log("Configuración de Firebase: ", firebaseConfig);
+initializeApp(firebaseConfig);
 
-let Firebase;
-if (!getApps().length) {
-  Firebase = initializeApp(firebaseConfig);
-  // console.log("Firebase inicializado");
-} else {
-  Firebase = getApps()[0]; // si ya está inicializado, usa la instancia existente
-  console.log("Firebase ya estaba inicializado");
-}
+const db = getFirestore();
 
-const storage = getStorage(Firebase);
+const storage = getStorage();
 
-export default Firebase;
 export { storage };
+export { db };

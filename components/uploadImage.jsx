@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
-import { View, Button, Image, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Button, Image, Alert, ActivityIndicator } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { Storage } from '../firebaseConfig';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from '../firebaseConfig';
 
-export function UploadImage({ onImageUpload }) {
+export function UploadImage({ onImageUpload, onImageUploaded }) {
     const [imageUrl, setImageUrl] = useState(null);
+    const [uploading, setUploading] = useState(false);
+
+    useEffect(() => {
+        if (imageUrl) {
+            onImageUpload(imageUrl);
+        }
+    }, [imageUrl]);
 
     const selectImage = async () => {
         try {
@@ -22,40 +29,45 @@ export function UploadImage({ onImageUpload }) {
                 quality: 1,
             });
 
-            if (!result.cancelled) {
-                uploadImage(result.uri);
+            console.log(result);
+
+            if (!result.canceled) {
+                uploadImage(result.assets[0].uri);
             }
         } catch (error) {
             console.error("Error al seleccionar la imagen: ", error);
         }
     };
 
-
-    const uploadImage = async (uri) => {
-
-
+    const uploadImage = async (file) => {
+        setUploading(true);
         try {
-            const response = await fetch(uri);
+            const response = await fetch(file);
             const blob = await response.blob();
-            console.log('Blob:', blob);
 
-            const imageName = new Date().getTime();
-            const imageRef = ref(Storage, `images/${imageName}`);
-            console.log('Image Ref:', imageRef);
+            const timestamp = Date.now();
+            const random = Math.floor(Math.random() * 1000);
+            const imageName = `image_${timestamp}_${random}`;
+            const imageRef = ref(storage, `images/${imageName}`);
 
-            console.log('Subiendo imagen...');
             await uploadBytes(imageRef, blob);
-            console.log('Imagen subida, obteniendo URL...');
+
+            const imageURL = await getDownloadURL(imageRef);
+            setImageUrl(imageURL);
+            if (onImageUploaded) {
+                onImageUploaded();
+            }
         } catch (error) {
             console.error("Error al subir la imagen: ", error);
+        } finally {
+            setUploading(false);
         }
-
-    };
+    }
 
     return (
-        <View>
-            <Button title="Seleccionar imagen" onPress={selectImage} />
-            {imageUrl && <Image source={{ uri: imageUrl }} style={{ width: 200, height: 200 }} />}
+        <View className="gap-2 mt-2 mb-2">
+            <Button title="Agregar imagen" onPress={selectImage} />
+            {uploading ? <ActivityIndicator size="large" color="#0000ff" /> : (imageUrl && <Image className="rounded-xl " source={{ uri: imageUrl }} resizeMode="cover" style={{ width: 200, height: 300 }} />)}
         </View>
     );
 }
