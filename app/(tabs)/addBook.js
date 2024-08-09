@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TextInput, Button, Text, Alert } from "react-native";
 import { createBook } from "../../lib/libreria";
+import { UploadImage } from "../../components/uploadImage";
 
 export default function AddBook() {
   const [book, setBook] = useState({});
@@ -38,7 +39,7 @@ export default function AddBook() {
   };
 
   return (
-    <View>
+    <View className="flex-1 justify-center items-center">
       <TextInput
         placeholder="Escritor"
         value={book.escritor}
@@ -74,6 +75,12 @@ export default function AddBook() {
         value={book.caratula}
         onChangeText={(value) => handleChange("caratula", value)}
       />
+      <UploadImage
+        onImageUpload={(url) => {
+          handleChange("caratula", url);
+        }}
+      />
+
       <Button title="Submit" onPress={handleSubmit} />
     </View>
   );

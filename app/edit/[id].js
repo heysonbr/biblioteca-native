@@ -6,6 +6,7 @@ import {
   Text,
   ActivityIndicator,
   Alert,
+  Image,
 } from "react-native";
 import { modifyBook, fetchBookInfo } from "../../lib/libreria";
 import { useLocalSearchParams, Stack, useNavigation } from "expo-router";
@@ -100,6 +101,7 @@ export default function Edit() {
         onChangeText={(value) => handleChange("sinopsis", value)}
         placeholder="Introduce la sinopsis"
       />
+
       {/* <Text>Portada</Text>
       <TextInput
         className="border border-gray-400 rounded-lg p-2 w-80 mb-2"
