@@ -6,8 +6,8 @@ import {
   ActivityIndicator,
   ScrollView,
 } from "react-native";
-import { fetchBooks } from "../../lib/libreria";
-import { AnimatedBookCard } from "../../components/bookCard";
+import { fetchBooks } from "../lib/libreria";
+import { AnimatedBookCard } from "./bookCard";
 
 export default function Search() {
   const [books, setBooks] = useState(null);

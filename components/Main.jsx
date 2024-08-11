@@ -37,7 +37,7 @@ export function Main() {
 
   useEffect(() => {
     const shuffledBooks = books.sort(() => 0.5 - Math.random());
-    setDisplayedBooks(shuffledBooks.slice(0, 8));
+    setDisplayedBooks(shuffledBooks);
   }, [books]);
 
   const filteredBooks = displayedBooks.filter((book) =>
@@ -47,8 +47,9 @@ export function Main() {
   );
 
   return (
-    <Screen className="bg-white">
+    <Screen className="bg-white items-center justify-center">
       <TextInput
+        className="border border-gray-400 active:border-blue-400 active:border-2  rounded-lg p-2  mb-2"
         style={styles.input}
         placeholder="Buscar libro"
         value={search}
