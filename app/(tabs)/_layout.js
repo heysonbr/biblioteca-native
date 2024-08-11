@@ -11,13 +11,14 @@ export default function TabsLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: { backgroundColor: "rgb(25, 31, 72)" },
+        tabBarActiveTintColor: "yellow",
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Inicio",
-          tabBarLabelStyle: { color: "white" },
+
           tabBarIcon: () => homeIcon,
         }}
       />
@@ -26,7 +27,7 @@ export default function TabsLayout() {
         name="addBook"
         options={{
           title: "Agregar libro",
-          tabBarLabelStyle: { color: "white" },
+
           tabBarIcon: () => addIcon,
         }}
       />
