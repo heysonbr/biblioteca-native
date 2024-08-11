@@ -47,26 +47,28 @@ export function Main() {
   );
 
   return (
-    <Screen className="bg-white items-center justify-center">
-      <TextInput
-        className="border border-gray-400 active:border-blue-400 active:border-2  rounded-lg p-2  m-2"
-        style={styles.input}
-        placeholder="Buscar libro"
-        value={search}
-        onChangeText={(value) => setSearch(value)}
-      />
-
-      {filteredBooks.length === 0 ? (
-        <ActivityIndicator size={"large"} />
-      ) : (
-        <FlatList
-          data={filteredBooks}
-          keyExtractor={(book) => book.id}
-          renderItem={({ item, index }) => (
-            <AnimatedBookCard book={item} index={index} />
-          )}
+    <Screen className="bg-white items-center justify-center ">
+      <View className="bg-blue-950 h-screen">
+        <TextInput
+          className="border bg-white border-gray-400 active:border-blue-400 active:border-2  rounded-lg p-2  m-2 "
+          style={styles.input}
+          placeholder="Buscar libro"
+          value={search}
+          onChangeText={(value) => setSearch(value)}
         />
-      )}
+
+        {filteredBooks.length === 0 ? (
+          <ActivityIndicator size={"large"} />
+        ) : (
+          <FlatList
+            data={filteredBooks}
+            keyExtractor={(book) => book.id}
+            renderItem={({ item, index }) => (
+              <AnimatedBookCard book={item} index={index} />
+            )}
+          />
+        )}
+      </View>
     </Screen>
   );
 }

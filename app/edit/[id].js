@@ -55,7 +55,7 @@ export default function Edit() {
   }
 
   return (
-    <View className="flex-1 items-center pt-10">
+    <View className="flex-1 items-center pt-10  bg-blue-950">
       <Stack.Screen
         options={{
           headerTitle: () => <Text></Text>,

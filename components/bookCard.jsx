@@ -9,7 +9,7 @@ export function BookCard({ book, index }) {
   return (
     <Link href={`/${book.id}`} asChild>
       <StyledPressable className="active:opacity-50 active:border-y-2 ctive:border-black">
-        <View key={book.id} style={styles.stepContainer}>
+        <View key={book.id} style={styles.stepContainer} className="bg-white/60">
           {index % 2 === 0 ? (
             <>
               <Image
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 10,
     padding: 10,
-    backgroundColor: "grey",
+
     borderRadius: 20,
   },
   titulo: {

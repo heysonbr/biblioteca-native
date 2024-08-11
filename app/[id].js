@@ -28,7 +28,7 @@ export default function Detail() {
   );
 
   return (
-    <View className="flex-1 pt-3 px-16  items-center ">
+    <View className="flex-1 pt-3 px-16  items-center bg-blue-950">
       <Stack.Screen
         options={{
           headerTitle: bookInfo?.titulo,
@@ -40,25 +40,25 @@ export default function Detail() {
         <ActivityIndicator size={"large"} />
       ) : (
         <View className="pt-4">
-          <View className="flex-row pb-4">
+          <View className="flex-row pb-4 h-80 w-64">
             <Image
               source={{ uri: bookInfo.caratula }}
-              resizeMode="cover"
-              className="rounded-lg h-80 w-64"
+              resizeMode="contain"
+              className="rounded-lg h-full w-full border-2 border-white/70 bg-white/30"
             />
           </View>
           <View className="gap-2">
-            <Text className="text-black font-bold">
+            <Text className="text-white font-bold">
               Autor:{bookInfo?.escritor}
             </Text>
-            <Text className="text-black font-bold">
+            <Text className="text-white font-bold">
               Paginas:{bookInfo?.paginas}
             </Text>
-            <Text className="text-black font-bold">
+            <Text className="text-white font-bold">
               Genero:{bookInfo?.genero}
             </Text>
-            <Text className="text-black font-bold">ISBN:{bookInfo?.ISBN}</Text>
-            <Text className="text-black font-bold">
+            <Text className="text-white font-bold">ISBN:{bookInfo?.ISBN}</Text>
+            <Text className="text-white font-bold">
               Sinopsis: {bookInfo?.sinopsis}
             </Text>
           </View>

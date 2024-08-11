@@ -54,46 +54,48 @@ export default function AddBook() {
 
   return (
     <ScrollView>
-      <View className="flex-1 justify-center items-center mb-6 bg-white">
-        <Text className="text-2xl mb-4">Añadir libro</Text>
+      <View className="flex-1 items-center mb-6 bg-blue-950 h-screen">
+        <Text className="text-2xl mb-4 text-white font-bold mt-2">
+          Añadir libro
+        </Text>
         <TextInput
-          className="border border-gray-400 active:border-blue-400 active:border-2  rounded-lg p-2 w-80 mb-2"
+          className="border border-gray-400 bg-white active:border-blue-400 active:border-2  rounded-lg p-2 w-80 mb-2"
           placeholder="Escritor"
           value={book.escritor}
           onChangeText={(value) => handleChange("escritor", value)}
         />
         <TextInput
-          className="border border-gray-400 rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
+          className="border border-gray-400 bg-white rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
           placeholder="Páginas"
           value={book.paginas}
           onChangeText={(value) => handleChange("paginas", value)}
         />
         <TextInput
-          className="border border-gray-400 rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
+          className="border border-gray-400 bg-white rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
           placeholder="ISBN"
           value={book.ISBN}
           onChangeText={(value) => handleChange("ISBN", value)}
         />
         <TextInput
-          className="border border-gray-400 rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
+          className="border border-gray-400 bg-white rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
           placeholder="Género"
           value={book.genero}
           onChangeText={(value) => handleChange("genero", value)}
         />
         <TextInput
-          className="border border-gray-400 rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
+          className="border border-gray-400 bg-white rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
           placeholder="Título"
           value={book.titulo}
           onChangeText={(value) => handleChange("titulo", value)}
         />
         <TextInput
-          className="border border-gray-400 rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
+          className="border border-gray-400 bg-white rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
           placeholder="Sinopsis"
           value={book.sinopsis}
           onChangeText={(value) => handleChange("sinopsis", value)}
         />
         <TextInput
-          className="border border-gray-400 rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
+          className="border border-gray-400 bg-white rounded-lg p-2 w-80 mb-2 active:border-blue-400 active:border-2"
           placeholder="Carátula (URL que termina en .jpg)"
           value={book.caratula}
           onChangeText={(value) => handleChange("caratula", value)}
