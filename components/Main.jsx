@@ -7,21 +7,22 @@ import {
   ScrollView,
   FlatList,
   ActivityIndicator,
+  TextInput,
 } from "react-native";
 import { Link } from "expo-router";
 import { Screen } from "./Screen";
-
 
 import { useCallback } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 import { fetchBooks } from "../lib/libreria";
 
-import { AnimatedBookCard,  } from "./bookCard";
+import { AnimatedBookCard } from "./bookCard";
 
 export function Main() {
   const [books, setBooks] = useState([]);
   const [displayedBooks, setDisplayedBooks] = useState([]);
+  const [search, setSearch] = useState("");
 
   const fetchBooksData = useCallback(() => {
     fetchBooks(setBooks);
@@ -39,16 +40,30 @@ export function Main() {
     setDisplayedBooks(shuffledBooks.slice(0, 8));
   }, [books]);
 
-  return (
-    <Screen className="bg-white" >
+  const filteredBooks = displayedBooks.filter((book) =>
+    book.titulo
+      ? book.titulo.toLowerCase().includes(search.toLowerCase())
+      : false
+  );
 
-      {displayedBooks.length === 0 ? (
+  return (
+    <Screen className="bg-white">
+      <TextInput
+        style={styles.input}
+        placeholder="Buscar libro"
+        value={search}
+        onChangeText={(value) => setSearch(value)}
+      />
+
+      {filteredBooks.length === 0 ? (
         <ActivityIndicator size={"large"} />
       ) : (
         <FlatList
-          data={displayedBooks}
+          data={filteredBooks}
           keyExtractor={(book) => book.id}
-          renderItem={({ item, index }) => <AnimatedBookCard book={item} index={index} />}
+          renderItem={({ item, index }) => (
+            <AnimatedBookCard book={item} index={index} />
+          )}
         />
       )}
     </Screen>
@@ -68,5 +83,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 8,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "gray",
+    borderRadius: 10,
+    padding: 5,
+    marginBottom: 10,
   },
 });

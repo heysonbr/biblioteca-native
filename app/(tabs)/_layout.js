@@ -19,6 +19,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="search"
+        options={{
+          title: "Buscar",
+          tabBarIcon: () => homeIcon,
+        }}
+      />
+      <Tabs.Screen
         name="addBook"
         options={{
           title: "Agregar libro",
