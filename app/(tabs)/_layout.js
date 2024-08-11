@@ -3,8 +3,6 @@ import { View } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function TabsLayout() {
-  const homeIcon = <FontAwesome name="home" size={24} color="white" />;
-  const addIcon = <FontAwesome name="plus" size={24} color="white" />;
   return (
     <Tabs
       className="bg-blue-950"
@@ -18,8 +16,9 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: "Inicio",
-
-          tabBarIcon: () => homeIcon,
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={28} name="home" color={color} />
+          ),
         }}
       />
 
@@ -27,8 +26,9 @@ export default function TabsLayout() {
         name="addBook"
         options={{
           title: "Agregar libro",
-
-          tabBarIcon: () => addIcon,
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={28} name="plus" color={color} />
+          ),
         }}
       />
     </Tabs>

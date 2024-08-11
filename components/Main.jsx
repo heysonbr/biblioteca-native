@@ -47,8 +47,8 @@ export function Main() {
   );
 
   return (
-    <Screen className="bg-white items-center justify-center ">
-      <View className="bg-blue-950 h-screen">
+    <Screen className="bg-blue-950 items-center justify-center ">
+      <View className="bg-blue-950 h-screen  pb-44 ">
         <TextInput
           className="border bg-white border-gray-400 active:border-blue-400 active:border-2  rounded-lg p-2  m-2 "
           style={styles.input}
