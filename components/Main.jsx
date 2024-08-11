@@ -63,6 +63,8 @@ export function Main() {
           <FlatList
             data={filteredBooks}
             keyExtractor={(book) => book.id}
+            initialNumToRender={10} // Reduce initial render amount
+            maxToRenderPerBatch={10} // Increase render amount per batch
             renderItem={({ item, index }) => (
               <AnimatedBookCard book={item} index={index} />
             )}
