@@ -39,8 +39,8 @@ export default function Detail() {
       {bookInfo === null ? (
         <ActivityIndicator size={"large"} />
       ) : (
-        <View className="pt-4">
-          <View className="flex-row pb-4 h-80 w-64">
+        <View className="pt-4 flex-1 items-center">
+          <View className="flex-row pb-4 h-80 w-64 items-center ">
             <Image
               source={{ uri: bookInfo.caratula }}
               resizeMode="contain"
