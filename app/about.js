@@ -1,15 +1,18 @@
 import { ScrollView, Text, Pressable } from "react-native";
 import { Link } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Stack } from "expo-router";
 
 export default function About() {
   return (
     <ScrollView className="pt-4 bg-white">
-      <Link asChild href="/">
-        <Pressable>
-          <FontAwesome name="home" size={24} color="black" />
-        </Pressable>
-      </Link>
+      <Stack.Screen
+        options={{
+          headerTitle: "Sobre nosotros",
+          headerLeft: () => null,
+        }}
+      />
+      <Link asChild href="/"></Link>
       <Text className="text-black font-bold mb-8 text-2xl ">About</Text>
       <Text className="text-black text-black/90 mb-4">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
