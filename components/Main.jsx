@@ -49,7 +49,7 @@ export function Main() {
   return (
     <Screen className="bg-white items-center justify-center">
       <TextInput
-        className="border border-gray-400 active:border-blue-400 active:border-2  rounded-lg p-2  mb-2"
+        className="border border-gray-400 active:border-blue-400 active:border-2  rounded-lg p-2  m-2"
         style={styles.input}
         placeholder="Buscar libro"
         value={search}
