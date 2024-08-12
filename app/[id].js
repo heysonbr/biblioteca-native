@@ -96,10 +96,6 @@ export default function Detail() {
               }}
             >
               <Text className="text-white">Borrar</Text>
-
-              {/* <Link href="/" className="text-white">
-    Borrar
-  </Link> */}
             </Pressable>
           </View>
         </View>
